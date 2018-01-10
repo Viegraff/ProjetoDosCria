@@ -13,6 +13,10 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(MainActivity.this, "SOU FODA", Toast.LENGTH_LONG).show();
 
+<<<<<<< HEAD
         Toast.makeText(MainActivity.this, "SOU FODA, NA CAMA EU TE ESCULACHO!", Toast.LENGTH_LONG).show();
+=======
+        Toast.makeText(MainActivity.this, "XAMPSON", Toast.LENGTH_LONG).show();
+>>>>>>> ec5f98c4daab021c50c708fe547656aa46d56624
     }
 }
