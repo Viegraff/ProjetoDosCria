@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/opcao_perfil"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/opcao_pagamento"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Pagamento" />
+        <item
+            android:id="@+id/opcao_suas_propagandas"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Suas Propagandas" />
+        <item
+            android:id="@+id/opcao_configuracoes"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Configurações" />
+        <item
+            android:id="@+id/opcao_ajuda"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Ajuda" />
+        <item
+            android:id="@+id/opcao_suporte"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Suporte" />
+        <item
+            android:id="@+id/opcao_termos_privacidade"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Termos e Política de Privacidade" />
+        <item
+            android:id="@+id/opcao_logout"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Logout" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_desenvolvimento"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Desenvolvimento Urbanistico" />
+        <item
+            android:id="@+id/nav_compartilhe"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Compartilhe nas redes sociais" />
+        <item
+            android:id="@+id/nav_inclusao_social"
+            android:icon="@drawable/cadeadindoscria"
+            android:title="Inclusão Social" />
+    </group>
+</menu>
