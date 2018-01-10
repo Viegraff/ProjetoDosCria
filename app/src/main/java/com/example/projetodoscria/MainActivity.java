@@ -12,5 +12,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toast.makeText(MainActivity.this, "SOU FODA", Toast.LENGTH_LONG).show();
+
+        Toast.makeText(MainActivity.this, "XAMPSON", Toast.LENGTH_LONG).show();
     }
 }
