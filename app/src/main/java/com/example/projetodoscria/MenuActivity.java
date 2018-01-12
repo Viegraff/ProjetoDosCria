@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.projetodoscria.fragment.FragmentEnviarPropaganda;
+
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @SuppressWarnings("deprecation")
@@ -33,7 +35,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -55,20 +56,16 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        // Inflate the menu_propaganda; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_propaganda, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        if (item.getItemId() == R.id.menuEnviarPropaganda) {
+            iniciarFragment(new FragmentEnviarPropaganda(), "Enviar Propaganda");
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
             return true;
         }
 
@@ -94,6 +91,13 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
+        iniciarFragment(fragment, title);
+
+
+
+    }
+
+    public void iniciarFragment(Fragment fragment, String title) {
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
