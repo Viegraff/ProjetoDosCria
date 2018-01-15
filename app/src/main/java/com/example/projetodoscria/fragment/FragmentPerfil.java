@@ -1,11 +1,12 @@
-package com.example.projetodoscria;
+package com.example.projetodoscria.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.projetodoscria.R;
 
 public class FragmentPerfil extends Fragment implements View.OnClickListener {
 
@@ -18,11 +19,6 @@ public class FragmentPerfil extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     }
 

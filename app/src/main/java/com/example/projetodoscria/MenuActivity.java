@@ -1,21 +1,39 @@
 package com.example.projetodoscria;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.example.projetodoscria.fragment.FragmentEnviarPropaganda;
+import com.example.projetodoscria.activity.CortadorVideoActivity;
+import com.example.projetodoscria.fragment.FragmentPerfil;
+
+import life.knowledge4.videotrimmer.utils.FileUtils;
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
+
+    static int RESULT_LOAD_VIDEO;
+
+    public static String CAMINHO_VIDEO;
+
+    Uri imagemSelecionada, videoSelecionado;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -56,7 +74,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu_propaganda; this adds items to the action bar if it is present.
+
+        requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, getString(R.string.permission_read_storage_rationale), REQUEST_STORAGE_READ_ACCESS_PERMISSION);
+
         getMenuInflater().inflate(R.menu.menu_propaganda, menu);
         return true;
     }
@@ -64,12 +84,25 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menuEnviarPropaganda) {
-            iniciarFragment(new FragmentEnviarPropaganda(), "Enviar Propaganda");
+
+            startActivityForResult(new Intent(Intent.ACTION_PICK, null).setType("image/* video/*"), RESULT_LOAD_VIDEO);
 
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_VIDEO && resultCode == RESULT_OK && data != null) {
+            videoSelecionado = data.getData();
+
+            startActivity(new Intent(this, CortadorVideoActivity.class).putExtra(CAMINHO_VIDEO, FileUtils.getPath(this, videoSelecionado)));
+        }
+
     }
 
     public void displayView(int viewId) {
@@ -83,18 +116,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 title = "Perfil";
 
                 break;
-
-            case R.id.opcao_pagamento:
-                fragment = new FragmentTwo();
-                title = "Pagamento";
-
-                break;
         }
 
         iniciarFragment(fragment, title);
-
-
-
     }
 
     public void iniciarFragment(Fragment fragment, String title) {
@@ -113,4 +137,24 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
+
+
+
+    private void requestPermission(final String permission, String rationale, final int requestCode) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.permission_title_rationale));
+            builder.setMessage(rationale);
+            builder.setPositiveButton(getString(R.string.label_ok), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityCompat.requestPermissions(MenuActivity.this, new String[]{permission}, requestCode);
+                }
+            });
+            builder.setNegativeButton(getString(R.string.label_cancel), null);
+            builder.show();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
+        }
+    }
 }
