@@ -1,6 +1,8 @@
 package com.example.projetodoscria;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,6 +20,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.projetodoscria.activity.CortadorVideoActivity;
@@ -29,7 +34,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     private static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
 
-    static int RESULT_LOAD_VIDEO;
+    static int RESULT_LOAD_IMAGEM = 2;
+    static int RESULT_LOAD_VIDEO = 3;
 
     public static String CAMINHO_VIDEO;
 
@@ -74,7 +80,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, getString(R.string.permission_read_storage_rationale), REQUEST_STORAGE_READ_ACCESS_PERMISSION);
 
         getMenuInflater().inflate(R.menu.menu_propaganda, menu);
@@ -85,7 +90,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menuEnviarPropaganda) {
 
-            startActivityForResult(new Intent(Intent.ACTION_PICK, null).setType("image/* video/*"), RESULT_LOAD_VIDEO);
+            exibirDialogGaleria(this);
 
             return true;
         }
@@ -99,6 +104,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         if (requestCode == RESULT_LOAD_VIDEO && resultCode == RESULT_OK && data != null) {
             videoSelecionado = data.getData();
+
+            startActivity(new Intent(this, CortadorVideoActivity.class).putExtra(CAMINHO_VIDEO, FileUtils.getPath(this, videoSelecionado)));
+        }
+
+        if (requestCode == RESULT_LOAD_IMAGEM && resultCode == RESULT_OK && data != null) {
+            imagemSelecionada = data.getData();
 
             startActivity(new Intent(this, CortadorVideoActivity.class).putExtra(CAMINHO_VIDEO, FileUtils.getPath(this, videoSelecionado)));
         }
@@ -137,9 +148,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
-
-
-
     private void requestPermission(final String permission, String rationale, final int requestCode) {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -157,4 +165,34 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
         }
     }
+
+    public void exibirDialogGaleria(Activity activity) {
+        Dialog dialog = new Dialog(activity);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_galeria);
+
+        Button buttonImagemDialog = (Button) dialog.findViewById(R.id.buttonImagemDialog);
+        Button buttonVideoDialog = (Button) dialog.findViewById(R.id.buttonVideoDialog);
+
+        buttonImagemDialog.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, null).setType("image/*"), RESULT_LOAD_IMAGEM);
+            }
+        });
+
+        buttonVideoDialog.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, null).setType("video/*"), RESULT_LOAD_VIDEO);
+            }
+        });
+
+        dialog.show();
+    }
+
 }
