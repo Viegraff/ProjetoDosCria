@@ -50,6 +50,5 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
             Log.e("XAMPSON", exception.getMessage());
         }
 
-
     }
 }
