@@ -9,16 +9,16 @@ import com.example.projetodoscria.R;
 import com.example.projetodoscria.fragment.MapaFragment;
 
 public class EnviarPropagandaActivity extends AppCompatActivity {
-    //private FragmentManager fragmentManager;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_propaganda);
 
-        //FragmentTransaction transaction = fragmentManager.beginTransaction();
-        //transaction.add(R.id.frameLayoutContainer, new MapaFragment(), "MapaFragment");
-        //transaction.commitAllowingStateLoss();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.frameLayoutContainer, new MapaFragment(), "MapaFragment");
+        transaction.commitAllowingStateLoss();
     }
 
 }

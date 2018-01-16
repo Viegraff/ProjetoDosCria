@@ -179,9 +179,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(null, EnviarPropagandaActivity.class));
-
-                //startActivityForResult(new Intent(Intent.ACTION_PICK, null).setType("image/*"), RESULT_LOAD_IMAGEM);
+                startActivityForResult(new Intent(Intent.ACTION_PICK, null).setType("image/*"), RESULT_LOAD_IMAGEM);
             }
         });
 
