@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.projetodoscria.MenuActivity;
 import com.example.projetodoscria.R;
 
 import java.io.File;
@@ -32,7 +31,7 @@ public class CortadorVideoActivity extends AppCompatActivity implements OnTrimVi
         String path = "";
 
         if (extraIntent != null) {
-            path = extraIntent.getStringExtra(MenuActivity.CAMINHO_VIDEO);
+            path = extraIntent.getStringExtra(MenuActivity.CAMINHO_ARQUIVO);
         }
 
         Toast.makeText(this, path, Toast.LENGTH_LONG).show();
