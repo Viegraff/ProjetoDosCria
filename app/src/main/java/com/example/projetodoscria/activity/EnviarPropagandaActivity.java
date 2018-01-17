@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.example.projetodoscria.R;
+import com.example.projetodoscria.fragment.EtapaFragment;
 import com.example.projetodoscria.fragment.MapaFragment;
 
 public class EnviarPropagandaActivity extends AppCompatActivity {
@@ -18,20 +19,13 @@ public class EnviarPropagandaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_propaganda);
 
-        Intent extraIntent = getIntent();
-        String nomeArquivo = "";
-
-        if (extraIntent != null) {
-            nomeArquivo = extraIntent.getStringExtra(MenuActivity.NOME_ARQUIVO);
-        }
-
-        textViewNomeArquivo = (TextView) findViewById(R.id.textViewNomeArquivo);
-
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayoutContainer, new MapaFragment());
+
+        fragmentTransaction.replace(R.id.frameLayoutMapa, new MapaFragment());
+        fragmentTransaction.replace(R.id.frameLayoutEtapas, new EtapaFragment());
+
         fragmentTransaction.commit();
 
-        textViewNomeArquivo.setText(nomeArquivo);
     }
 
 }

@@ -6,21 +6,15 @@
     android:weightSum="2">
 
     <FrameLayout
-        android:id="@+id/frameLayoutContainer"
+        android:id="@+id/frameLayoutMapa"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1" />
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frameLayoutEtapas"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <TextView
-            android:id="@+id/textViewNomeArquivo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Nenhum Arquivo Selecionado" />
-
-    </LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
 
 </LinearLayout>
