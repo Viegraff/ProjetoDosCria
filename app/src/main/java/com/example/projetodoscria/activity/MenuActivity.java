@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -23,9 +25,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.projetodoscria.R;
 import com.example.projetodoscria.fragment.PerfilFragment;
+
+import org.apache.commons.io.FilenameUtils;
 
 import life.knowledge4.videotrimmer.utils.FileUtils;
 
@@ -37,6 +42,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     static int RESULT_LOAD_VIDEO = 3;
 
     public static String CAMINHO_ARQUIVO;
+    public static String NOME_ARQUIVO = null;
 
     Uri imagemSelecionada, videoSelecionado;
 
@@ -110,8 +116,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == RESULT_LOAD_IMAGEM && resultCode == RESULT_OK && data != null) {
             imagemSelecionada = data.getData();
 
-            startActivity(new Intent(this, CortadorVideoActivity.class).putExtra(CAMINHO_ARQUIVO, FileUtils.getPath(this, videoSelecionado)));
+            startActivity(new Intent(this, EnviarPropagandaActivity.class).putExtra(NOME_ARQUIVO, FilenameUtils.getName(getRealPathFromURI(imagemSelecionada))));
         }
+
+
 
     }
 
@@ -134,7 +142,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     public void iniciarFragment(Fragment fragment, String title) {
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
             fragmentTransaction.replace(R.id.frameLayout, fragment);
             fragmentTransaction.commit();
         }
@@ -192,6 +199,15 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         });
 
         dialog.show();
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        @SuppressWarnings("deprecation")
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
     }
 
 }

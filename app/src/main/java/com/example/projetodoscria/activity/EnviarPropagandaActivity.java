@@ -1,22 +1,37 @@
 package com.example.projetodoscria.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.example.projetodoscria.R;
 import com.example.projetodoscria.fragment.MapaFragment;
 
 public class EnviarPropagandaActivity extends AppCompatActivity {
 
+    TextView textViewNomeArquivo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enviar_propaganda);
 
+        Intent extraIntent = getIntent();
+        String nomeArquivo = "";
+
+        if (extraIntent != null) {
+            nomeArquivo = extraIntent.getStringExtra(MenuActivity.NOME_ARQUIVO);
+        }
+
+        textViewNomeArquivo = (TextView) findViewById(R.id.textViewNomeArquivo);
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameLayoutContainer, new MapaFragment());
         fragmentTransaction.commit();
+
+        textViewNomeArquivo.setText(nomeArquivo);
     }
 
 }
