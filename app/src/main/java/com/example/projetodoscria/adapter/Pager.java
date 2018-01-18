@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.projetodoscria.tabs.Tab2;
-import com.example.projetodoscria.tabs.Tab3;
+import com.example.projetodoscria.tabs.TabData;
+import com.example.projetodoscria.tabs.TabHorario;
 import com.example.projetodoscria.tabs.Tab4;
 import com.example.projetodoscria.tabs.Tab5;
 import com.example.projetodoscria.tabs.TabMidia;
@@ -36,11 +36,11 @@ public class Pager extends FragmentStatePagerAdapter {
 
                 return tabMidia;
             case 1:
-                Tab2 tab2 = new Tab2();
-                return tab2;
+                TabData tabData = new TabData();
+                return tabData;
             case 2:
-                Tab3 tab3 = new Tab3();
-                return tab3;
+                TabHorario tabHorario = new TabHorario();
+                return tabHorario;
             case 3:
                 Tab4 tab4 = new Tab4();
                 return tab4;
