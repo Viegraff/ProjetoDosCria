@@ -34,11 +34,18 @@ public class EtapaFragment extends Fragment implements View.OnClickListener, Tab
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
 
         Drawable midia = getContext().getResources().getDrawable(R.drawable.midia);
+        Drawable calendario = getContext().getResources().getDrawable(R.drawable.calendario);
+        Drawable horario = getContext().getResources().getDrawable(R.drawable.horario);
+        Drawable local = getContext().getResources().getDrawable(R.drawable.local);
+        Drawable confirma = getContext().getResources().getDrawable(R.drawable.confirmar);
+
 
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setIcon(midia));//.setText("Mídia"));
-        tabLayout.addTab(tabLayout.newTab().setText("Your Tab Title"));
-        tabLayout.addTab(tabLayout.newTab().setText("Your Tab Title"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(midia));
+        tabLayout.addTab(tabLayout.newTab().setIcon(calendario));
+        tabLayout.addTab(tabLayout.newTab().setIcon(horario));
+        tabLayout.addTab(tabLayout.newTab().setIcon(local));
+        tabLayout.addTab(tabLayout.newTab().setIcon(confirma));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Initializing viewPager

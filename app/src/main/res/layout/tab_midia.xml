@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_margin="12dp">
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="12dp"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewTipoArquivo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Tipo Arquivo"
+        android:layout_marginLeft="10dp"
+        android:text="Arquivo"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
@@ -22,6 +24,9 @@
             android:id="@+id/textViewNomeArquivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:text="Nome Arquivo" />
 
@@ -29,19 +34,34 @@
             android:id="@+id/textViewTamanhoArquivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
             android:text="0.00 KB" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="20dp"
             android:text="X"
-            android:textColor="#FF0000"/>
+            android:textColor="#FF0000" />
 
     </LinearLayout>
 
-    <SeekBar
+    <TextView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:text="Tempo de reprodução da imagem (em segundos)" />
 
+    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+        android:id="@+id/seekBarTempo"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="6"
+        android:progress="1" />
 </LinearLayout>
