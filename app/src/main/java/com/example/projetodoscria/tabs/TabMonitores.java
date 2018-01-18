@@ -12,12 +12,13 @@ import com.example.projetodoscria.R;
  * Created by DrGreend on 18/01/2018.
  */
 
-public class Tab4 extends Fragment {
+public class TabMonitores extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.tab_monitores, container, false);
 
-        //Returning the layout file after inflating
-        //Change R.layout.tab_midia in you classes
-        return inflater.inflate(R.layout.tab4, container, false);
+
+
+        return view;
     }
 }

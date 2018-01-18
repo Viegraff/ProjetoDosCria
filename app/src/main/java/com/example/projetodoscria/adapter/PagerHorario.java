@@ -4,10 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.projetodoscria.tabs.Tab4;
-import com.example.projetodoscria.tabs.Tab5;
-import com.example.projetodoscria.tabs.TabData;
-import com.example.projetodoscria.tabs.TabHorario;
 import com.example.projetodoscria.tabs.TabHorarios1;
 import com.example.projetodoscria.tabs.TabHorarios2;
 import com.example.projetodoscria.tabs.TabHorarios3;

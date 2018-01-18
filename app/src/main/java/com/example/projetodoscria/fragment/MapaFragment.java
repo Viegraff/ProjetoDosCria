@@ -2,11 +2,14 @@ package com.example.projetodoscria.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,11 +24,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import static android.content.Context.LOCATION_SERVICE;
+
 public class MapaFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener, LocationListener {
 
     private GoogleMap googleMap;
     private LocationManager locationManager;
     ArrayList<Monitores> monits = new ArrayList<Monitores>();
+    private String provider;
 
     Context context;
 
@@ -40,7 +46,7 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onResume() {
         super.onResume();
 
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -50,27 +56,46 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public void onPause() {
         super.onPause();
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
         locationManager.removeUpdates(this);
 
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
-
-        Location locationAtual = new Location("");
-
         try {
-            locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+       /* LocationManager service = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+        boolean enabledGPS = service
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean enabledWiFi = service
+                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (!enabledGPS) {
+            Toast.makeText(getActivity(), "Sinal GPS não encontrado!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+        else if(!enabledWiFi){
+            Toast.makeText(getActivity(), "Sinal de internet não encontrado!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+            locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            provider = locationManager.getBestProvider(criteria,false);*/
+
+            Location locationAtual = new Location("");//locationManager.getLastKnownLocation(provider);//new Location("");
 
             googleMap = map;
             googleMap.setOnMapClickListener(this);
             googleMap.getUiSettings().setZoomControlsEnabled(true);
             googleMap.setMyLocationEnabled(true);
+            CameraUpdateFactory.zoomIn();
 
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(locationAtual.getLatitude(), locationAtual.getLongitude()));
             markerOptions.title("Localização Atual");
+            googleMap.addMarker(markerOptions);
 
             for (int i = 0; i < 4; i++) {
                 monits.add(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974));
