@@ -64,6 +64,14 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
+
+                fragment = new PerfilFragment();
+                title = "Perfil";
+
+        iniciarFragment(fragment, title);
     }
 
     @Override

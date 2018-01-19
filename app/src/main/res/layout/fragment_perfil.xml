@@ -165,10 +165,18 @@
 
     </LinearLayout>
 
-    <ImageView
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="29dp"
+        android:orientation="horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:src="@drawable/ads_example"
         android:adjustViewBounds="true"/>
+    </LinearLayout>
 
 </FrameLayout>

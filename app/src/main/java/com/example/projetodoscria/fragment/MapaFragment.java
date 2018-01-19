@@ -13,8 +13,8 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.example.projetodoscria.modelo.Monitores;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,6 +29,7 @@ import static android.content.Context.LOCATION_SERVICE;
 public class MapaFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener, LocationListener {
 
     private GoogleMap googleMap;
+    private GoogleApiClient mGoogleApiClient;
     private LocationManager locationManager;
     ArrayList<Monitores> monits = new ArrayList<Monitores>();
     private String provider;
@@ -39,6 +40,22 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+       /* LocationManager service = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+        boolean enabledGPS = service
+                .isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean enabledWiFi = service
+                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (!enabledGPS) {
+            Toast.makeText(getActivity(), "Sinal GPS não encontrado!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+        else if(!enabledWiFi){
+            Toast.makeText(getActivity(), "Sinal de internet não encontrado!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(intent);
+        }
+*/
         getMapAsync(this);
     }
 
@@ -58,44 +75,30 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
         super.onPause();
         locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
         locationManager.removeUpdates(this);
-
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         try {
-
-       /* LocationManager service = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-        boolean enabledGPS = service
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-        boolean enabledWiFi = service
-                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        if (!enabledGPS) {
-            Toast.makeText(getActivity(), "Sinal GPS não encontrado!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
-        else if(!enabledWiFi){
-            Toast.makeText(getActivity(), "Sinal de internet não encontrado!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
-            locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-            provider = locationManager.getBestProvider(criteria,false);*/
-
             Location locationAtual = new Location("");//locationManager.getLastKnownLocation(provider);//new Location("");
+            /*for(String provider : locationManager.getAllProviders()){
+                Toast.makeText(getActivity(), provider, Toast.LENGTH_LONG).show();
+            }
+
+            /*locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            provider = locationManager.getBestProvider(criteria,true);*/
+
+            //Location locationAtual = locationManager.getLastKnownLocation(provider);
 
             googleMap = map;
             googleMap.setOnMapClickListener(this);
             googleMap.getUiSettings().setZoomControlsEnabled(true);
             googleMap.setMyLocationEnabled(true);
-            CameraUpdateFactory.zoomIn();
 
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(locationAtual.getLatitude(), locationAtual.getLongitude()));
             markerOptions.title("Localização Atual");
-            googleMap.addMarker(markerOptions);
 
             for (int i = 0; i < 4; i++) {
                 monits.add(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974));
