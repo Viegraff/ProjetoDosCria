@@ -25,6 +25,8 @@ import life.knowledge4.videotrimmer.interfaces.OnTrimVideoListener;
 public class CortadorVideoActivity extends Activity implements OnTrimVideoListener, OnK4LVideoListener {
 
     ArquivoUtil arquivoUtil = new ArquivoUtil();
+    InputStream inputStream = null;
+    OutputStream outputStream = null;
 
     K4LVideoTrimmer videoTrimmer;
 
@@ -64,14 +66,38 @@ public class CortadorVideoActivity extends Activity implements OnTrimVideoListen
 
     @Override
     public void getResult(Uri uri) {
-        File arquivo = new File(uri.getPath());
-        File diretorioVideo = new File("/SmartCorner/Video/");
+        try {
+            File arquivo = new File(uri.getPath());
+            File diretorioVideo = new File(Environment.getExternalStorageDirectory() + "/SmartBusiness");//"/SmartCorner/Video/");
+            File novoArquivo = new File(Environment.getExternalStorageDirectory() + "/SmartBusiness/", arquivo.getName());
+            if (!diretorioVideo.exists()) {
+                diretorioVideo.mkdir();
+                inputStream = new FileInputStream(arquivo);
+                //Log.e("Arquivo: ", arquivo.getAbsolutePath());
+                System.out.println("Caminho: "+arquivo.getAbsolutePath());
+                outputStream = new FileOutputStream(novoArquivo);
 
-        createDirIfNotExists(diretorioVideo.getPath());
+                byte[] data = new byte[inputStream.available()];
+                inputStream.read(data);
+                outputStream.write(data);
+                inputStream.close();
+                outputStream.close();
 
-        arquivoUtil.moverArquivo(Environment.getExternalStorageDirectory().getAbsolutePath(), arquivo.getName(), diretorioVideo.getAbsolutePath());
+            } else {
+                inputStream = new FileInputStream(arquivo);
+                outputStream = new FileOutputStream(novoArquivo);
 
-        finish();
+                byte[] data = new byte[inputStream.available()];
+                inputStream.read(data);
+                outputStream.write(data);
+                inputStream.close();
+                outputStream.close();
+            }
+            arquivo.delete();
+            finish();
+        } catch (Exception exception) {
+            Log.e("ERRO:", exception.getMessage());
+        }
     }
 
     @Override
@@ -86,7 +112,7 @@ public class CortadorVideoActivity extends Activity implements OnTrimVideoListen
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-    public static boolean createDirIfNotExists(String path) {
+   /* public static boolean createDirIfNotExists(String path) {
         boolean ret = true;
 
         File file = new File(Environment.getExternalStorageDirectory(), path);
@@ -97,5 +123,5 @@ public class CortadorVideoActivity extends Activity implements OnTrimVideoListen
             }
         }
         return ret;
-    }
+    }*/
 }
