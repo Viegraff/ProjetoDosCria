@@ -179,7 +179,7 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
-        Toast.makeText(getActivity(), "O Status foi Alterado!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), "O Status foi Alterado!", Toast.LENGTH_LONG).show();
     }
 
     @Override

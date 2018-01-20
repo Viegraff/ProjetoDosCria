@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="12dp"
     android:orientation="vertical">
 
@@ -10,14 +11,54 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <TextView
-        android:id="@+id/textView"
-        android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Data de Veiculação do Anúncio"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarImagens"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/branco"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data de Veiculação do Anúncio"
+                android:textColor="@color/preto" />
+            <View
+                android:layout_width="3dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:background="#D3D3D3" />
+
+            <Button
+                android:id="@+id/ButtonSalvaHorario"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:text="Salvar"
+                android:background="@color/branco"
+                android:textColor="#1E90FF" />
+
+        </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
         <DatePicker
             android:id="@+id/simpleDatePicker"
@@ -27,13 +68,8 @@
             android:layout_marginTop="20dp"
             android:calendarViewShown="false"
             android:datePickerMode="spinner" />
-    <Button
-        android:id="@+id/ButtonSalvar"
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="270dp"
-        android:layout_marginTop="-239dp"
-        android:text="Salvar"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

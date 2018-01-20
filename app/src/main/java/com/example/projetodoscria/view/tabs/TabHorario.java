@@ -28,7 +28,7 @@ public class TabHorario extends Fragment implements View.OnClickListener, TabLay
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbarHorarios);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        //((AppCompatActivity)getActivity()).getSupportActionBar().hide();
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayoutHorarios);
         Drawable relogio = getContext().getResources().getDrawable(R.drawable.relogio);
