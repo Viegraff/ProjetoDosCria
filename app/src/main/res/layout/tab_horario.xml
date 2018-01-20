@@ -12,12 +12,28 @@
         android:id="@+id/toolbarHorarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/branco"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_marginLeft="11dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="HORÁRIO DE VEICULAÇÃO DO VEÍCULO"/>
+
+
     <!-- our tablayout to display tabs  -->
+    <Button
+        android:id="@+id/ButtonSalvaHorario"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="-29dp"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:text="Salvar" />
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayoutHorarios"
         android:layout_width="match_parent"

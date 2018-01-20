@@ -33,7 +33,6 @@ public class PagerHorario extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 TabHorarios1 tabHorarios1 = new TabHorarios1();
-
                 return tabHorarios1;
             case 1:
                 TabHorarios2 tabHorarios2 = new TabHorarios2();

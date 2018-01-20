@@ -33,7 +33,6 @@ public class Pager extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 TabMidia tabMidia = new TabMidia();
-
                 return tabMidia;
             case 1:
                 TabData tabData = new TabData();

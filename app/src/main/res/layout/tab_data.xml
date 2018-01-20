@@ -19,20 +19,20 @@
         android:text="Data de Veiculação do Anúncio"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-    <DatePicker
-        android:id="@+id/simpleDatePicker"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="100dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:calendarViewShown="false"
-        android:datePickerMode="spinner" />
+        <DatePicker
+            android:id="@+id/simpleDatePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="20dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
     <Button
         android:id="@+id/ButtonSalvar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
         android:layout_marginLeft="270dp"
-        android:layout_marginTop="-202dp"
+        android:layout_marginTop="-239dp"
         android:text="Salvar"/>
     </LinearLayout>
 
