@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activity.MenuActivity">
+        <activity android:name=".view.activity.MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,9 +24,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.EnviarPropagandaActivity" />
-        <activity android:name=".activity.CortadorVideoActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".view.activity.EnviarPropagandaActivity" />
+        <activity android:name=".view.activity.CortadorVideoActivity" />
+        <activity android:name=".view.activity.LoginActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
