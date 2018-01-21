@@ -34,6 +34,7 @@
         <activity android:name=".view.activity.EnviarPropagandaActivity" />
         <activity android:name=".view.activity.CortadorVideoActivity" />
         <activity android:name=".view.activity.LoginActivity" />
+        <activity android:name=".view.activity.SelecionaMidiaActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

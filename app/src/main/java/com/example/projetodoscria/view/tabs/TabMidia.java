@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.projetodoscria.R;
+import com.example.projetodoscria.modelo.Arquivo;
+import com.example.projetodoscria.util.ArquivoUtil;
 import com.example.projetodoscria.view.activity.MenuActivity;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
@@ -20,31 +22,32 @@ public class TabMidia extends Fragment {
     TextView textViewNomeArquivo, textViewTamanhoArquivo;
     DiscreteSeekBar seekBarTempo;
 
+    ArquivoUtil arquivoUtil = new ArquivoUtil();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_midia, container, false);
 
         textViewNomeArquivo = view.findViewById(R.id.textViewNomeArquivo);
         textViewTamanhoArquivo = view.findViewById(R.id.textViewTamanhoArquivo);
+
         seekBarTempo = view.findViewById(R.id.seekBarTempo);
-        //initSeekBar();
         seekBarTempo.setMin(1);
         seekBarTempo.setMax(3);
         seekBarTempo.setProgress(1);
 
-       seekBarTempo.setNumericTransformer(new DiscreteSeekBar.NumericTransformer() {
+        seekBarTempo.setNumericTransformer(new DiscreteSeekBar.NumericTransformer() {
             @Override
             public int transform(int value) {
                 return value * 10;
             }
         });
 
-
         seekBarTempo.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
             public void onProgressChanged(DiscreteSeekBar seekBar, int progress, boolean fromUser) {
-                int interval=1;
-                progress = ((int)Math.round(progress/interval))*interval;
+                int interval = 1;
+                progress = ((int) Math.round(progress / interval)) * interval;
                 seekBar.setProgress(progress);
             }
 
@@ -68,29 +71,18 @@ public class TabMidia extends Fragment {
             }
         });
 
+        Intent intent = getActivity().getIntent();
+        Arquivo arquivo = new Arquivo();
 
-        Intent extraIntent = getActivity().getIntent();
-        String caminhoArquivo = "";
-
-        if (extraIntent != null) {
-            caminhoArquivo = extraIntent.getStringExtra(MenuActivity.CAMINHO_ARQUIVO);
+        if (intent != null) {
+            arquivo = (Arquivo) intent.getSerializableExtra("ARQUIVO");
         }
 
-        File file = new File(caminhoArquivo);
-
-        textViewNomeArquivo.setText(file.getName().toString());
-        textViewTamanhoArquivo.setText(retornaTamanhoArquivo(file));
+        textViewNomeArquivo.setText(arquivo.getNomeArquivo());
+        textViewTamanhoArquivo.setText(arquivo.getTamanhoArquivo());
 
         return view;
     }
 
-    public String retornaTamanhoArquivo(File file) {
-        long tamanho = file.length() / 1024;
 
-        if (tamanho >= 1024) {
-            return (tamanho / 1024 + "Mb").toString();
-        } else {
-            return (tamanho + "Kb").toString();
-        }
-    }
 }

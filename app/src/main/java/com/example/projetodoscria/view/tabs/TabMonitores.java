@@ -18,10 +18,6 @@ import com.example.projetodoscria.view.fragment.MapaFragment;
 
 import java.util.ArrayList;
 
-/**
- * Created by DrGreend on 18/01/2018.
- */
-
 public class TabMonitores extends ListFragment {
     AdapterMonitores adapterMonitores;
     ListView listView;

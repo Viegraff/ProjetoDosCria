@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <Button
+                    android:id="@+id/buttonCancelarImagem"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:text="Cancelar"
+                    android:textSize="8sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonAvancarImagem"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:text="Avançar"
+                        android:textSize="8sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageViewMidia"
+                android:layout_width="fill_parent"
+                android:layout_height="256dp"
+                android:layout_gravity="center"
+                android:background="#6495ED"
+                android:src="@drawable/smartbusiness" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarImagens"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/preto"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/textViewNomeImagem"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_weight="1"
+                        android:text="Nome da Imagem" />
+
+                    <TextView
+                        android:id="@+id/textViewTamanhoImagem"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Tamanho" />
+
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:background="#7F7F7F" />
+
+                    <Button
+                        android:id="@+id/buttonMudarImagem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:background="@color/preto"
+                        android:gravity="right"
+                        android:text="Mudar Imagem"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/branco" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

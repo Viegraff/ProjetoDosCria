@@ -41,7 +41,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     static int RESULT_LOAD_VIDEO = 3;
 
     public static String CAMINHO_ARQUIVO;
-    public static String NOME_ARQUIVO = null;
 
     Uri imagemSelecionada, videoSelecionado;
 
@@ -130,7 +129,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == RESULT_LOAD_IMAGEM && resultCode == RESULT_OK && data != null) {
             imagemSelecionada = data.getData();
 
-            startActivity(new Intent(this, EnviarPropagandaActivity.class).putExtra(CAMINHO_ARQUIVO, FileUtils.getPath(this, imagemSelecionada)));
+            startActivity(new Intent(this, SelecionaMidiaActivity.class).putExtra(CAMINHO_ARQUIVO, FileUtils.getPath(this, imagemSelecionada)));
         }
 
     }
