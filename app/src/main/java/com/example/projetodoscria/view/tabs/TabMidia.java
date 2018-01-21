@@ -29,7 +29,7 @@ public class TabMidia extends Fragment {
         seekBarTempo = view.findViewById(R.id.seekBarTempo);
         //initSeekBar();
         seekBarTempo.setMin(1);
-        seekBarTempo.setMax(6);
+        seekBarTempo.setMax(3);
         seekBarTempo.setProgress(1);
 
        seekBarTempo.setNumericTransformer(new DiscreteSeekBar.NumericTransformer() {
@@ -46,12 +46,11 @@ public class TabMidia extends Fragment {
                 int interval=1;
                 progress = ((int)Math.round(progress/interval))*interval;
                 seekBar.setProgress(progress);
-
             }
 
             @Override
             public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
-                int progressStep = seekBar.getMax() / 5;
+                int progressStep = seekBar.getMax() / 3;
 
                 int lastDotProgress = Math.round(seekBar.getProgress() / progressStep) * progressStep;
                 int nextDotProgress = lastDotProgress + progressStep;

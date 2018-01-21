@@ -17,6 +17,13 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="horizontal"
         android:weightSum="3">
 
@@ -24,9 +31,7 @@
             android:id="@+id/textViewNomeArquivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Nome Arquivo" />
 
@@ -34,20 +39,30 @@
             android:id="@+id/textViewTamanhoArquivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="0.00 KB" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
             android:text="X"
             android:textColor="#FF0000" />
 
     </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_gravity="center"
+        android:background="#7F7F7F" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <TextView
         android:layout_width="fill_parent"
@@ -60,8 +75,10 @@
     <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
         android:id="@+id/seekBarTempo"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:max="6"
+        android:max="3"
         android:progress="1" />
+    </LinearLayout>
 </LinearLayout>
