@@ -9,7 +9,8 @@ import com.example.projetodoscria.R;
 import com.example.projetodoscria.view.fragment.EtapaFragment;
 import com.example.projetodoscria.view.fragment.MapaFragment;
 
-public class EnviarPropagandaActivity extends AppCompatActivity {
+public class EnviarPropagandaActivity extends AppCompatActivity{
+
 
     TextView textViewNomeArquivo;
 

@@ -9,9 +9,15 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.projetodoscria.R;
 import com.example.projetodoscria.modelo.Monitores;
+import com.example.projetodoscria.view.tabs.TabMonitores;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,7 +26,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.Context.LOCATION_SERVICE;
 import static android.content.Intent.getIntent;
@@ -43,6 +52,10 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
         monits.add(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974, 6.93, "disponivel"));
         monits.add(new Monitores("Ponto 1", -22.9, -43.1, 7.35, "disponivel"));
         monits.add(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834, 6.93, "indisponivel"));
+
+        Intent intent;
+        intent.putExtra("monits", monits);
+        startActivity(intent);
 
         getMapAsync(this);
     }

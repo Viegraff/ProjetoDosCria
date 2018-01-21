@@ -1,10 +1,12 @@
 package com.example.projetodoscria.modelo;
 
+import java.io.Serializable;
+
 /**
  * Created by DrGreend on 11/01/2018.
  */
 
-public class Monitores {
+public class Monitores implements Serializable {
     private int id;
     private String nome, status;
     private double latitude, longitude, preco;

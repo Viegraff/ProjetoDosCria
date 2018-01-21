@@ -9,7 +9,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.projetodoscria.R;
-import com.example.projetodoscria.util.ArquivoUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,7 +23,6 @@ import life.knowledge4.videotrimmer.interfaces.OnTrimVideoListener;
 
 public class CortadorVideoActivity extends Activity implements OnTrimVideoListener, OnK4LVideoListener {
 
-    ArquivoUtil arquivoUtil = new ArquivoUtil();
     InputStream inputStream = null;
     OutputStream outputStream = null;
 
