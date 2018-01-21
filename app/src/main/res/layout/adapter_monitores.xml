@@ -70,11 +70,12 @@
                 android:text="Preço"
                 android:textSize="14dp"
                 android:textColor="@color/preto"/>
+
             <ImageButton
                 android:id="@+id/buttonConfirmaMonitor"
-                android:layout_margin="8dp"
-                android:layout_width="45dp"
-                android:layout_height="30dp" />
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_margin="8dp" />
 
         </LinearLayout>
     </LinearLayout>

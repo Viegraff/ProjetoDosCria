@@ -6,13 +6,15 @@ package com.example.projetodoscria.modelo;
 
 public class Monitores {
     private int id;
-    private String nome;
+    private String nome, status;
     private double latitude, longitude, preco;
 
-    public Monitores(String nome, double latitude, double longitude) {
+    public Monitores(String nome, double latitude, double longitude, double preco, String status) {
         this.nome = nome;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.preco = preco;
+        this.status = status;
     }
 
     public int getId() {
@@ -53,5 +55,13 @@ public class Monitores {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

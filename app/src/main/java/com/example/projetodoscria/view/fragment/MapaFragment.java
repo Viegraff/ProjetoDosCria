@@ -2,6 +2,7 @@ package com.example.projetodoscria.view.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import static android.content.Context.LOCATION_SERVICE;
+import static android.content.Intent.getIntent;
 import static java.security.AccessController.getContext;
 
 public class MapaFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener, LocationListener {
@@ -38,22 +40,10 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-       /* LocationManager service = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-        boolean enabledGPS = service
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-        boolean enabledWiFi = service
-                .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        if (!enabledGPS) {
-            Toast.makeText(getActivity(), "Sinal GPS não encontrado!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
-        else if(!enabledWiFi){
-            Toast.makeText(getActivity(), "Sinal de internet não encontrado!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }
-*/
+        monits.add(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974, 6.93, "disponivel"));
+        monits.add(new Monitores("Ponto 1", -22.9, -43.1, 7.35, "disponivel"));
+        monits.add(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834, 6.93, "indisponivel"));
+
         getMapAsync(this);
     }
 
@@ -97,12 +87,6 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(locationAtual.getLatitude(), locationAtual.getLongitude()));
             markerOptions.title("Localização Atual");
-
-            for (int i = 0; i < 4; i++) {
-                monits.add(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974));
-                monits.add(new Monitores("Ponto 1", -22.9, -43.1));
-                monits.add(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834));
-            }
 
         } catch (SecurityException exception) {
             Log.e("XAMPSON", exception.getMessage());
@@ -175,9 +159,6 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                 //Toast.makeText(getActivity(), "Não está perto!", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-    public ArrayList<Monitores> compartilhaMonitor(){
-        return monits;
     }
 
     @Override
