@@ -7,7 +7,7 @@ package com.example.projetodoscria.modelo;
 public class Monitores {
     private int id;
     private String nome;
-    private double latitude, longitude;
+    private double latitude, longitude, preco;
 
     public Monitores(String nome, double latitude, double longitude) {
         this.nome = nome;
@@ -45,5 +45,13 @@ public class Monitores {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 }

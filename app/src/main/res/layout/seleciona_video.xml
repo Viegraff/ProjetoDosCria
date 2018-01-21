@@ -71,11 +71,11 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:textColor="@color/branco"
-                        android:text="Nome da Imagem"
+                        android:text="Nome do Vídeo"
                         android:gravity="left"/>
 
                     <TextView
-                        android:id="@+id/TextViewTamanhoImagem"
+                        android:id="@+id/TextViewTamanhoVideo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -92,7 +92,7 @@
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mudar Imagem"
+                        android:text="Mudar Vídeo"
                         android:textAlignment="viewStart"
                         android:layout_margin="10dp"
                         android:background="@color/preto"

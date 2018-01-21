@@ -176,6 +176,9 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
             }
         }
     }
+    public ArrayList<Monitores> compartilhaMonitor(){
+        return monits;
+    }
 
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
