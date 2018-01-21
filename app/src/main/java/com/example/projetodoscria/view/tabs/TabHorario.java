@@ -64,12 +64,11 @@ public class TabHorario extends Fragment implements View.OnClickListener, TabLay
 
     @Override
     public void onTabUnselected(TabLayout.Tab tab) {
-
+        viewPager.setCurrentItem(0);
     }
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
-
     }
 
     @Override

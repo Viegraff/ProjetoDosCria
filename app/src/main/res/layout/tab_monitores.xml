@@ -6,12 +6,34 @@
     android:layout_margin="12dp"
     android:orientation="vertical">
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewNomeMonitor"
+        android:layout_margin="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Tab 4"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:text="Nome"
+        android:textSize="15dp"
+        android:textColor="@color/preto"
+        android:textStyle="bold"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:background="@color/preto" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
