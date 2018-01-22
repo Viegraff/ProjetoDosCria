@@ -2,7 +2,7 @@ package com.example.projetodoscria.modelo;
 
 public class Monitores {
     private int id;
-    private String nome, status;
+    private String nome, status, endereco;
     private double latitude, longitude, preco;
 
     public Monitores(String nome, double latitude, double longitude, double preco, String status) {
@@ -59,5 +59,13 @@ public class Monitores {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 }

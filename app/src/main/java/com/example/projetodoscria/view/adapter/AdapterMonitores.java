@@ -25,7 +25,7 @@ public class AdapterMonitores extends ArrayAdapter<Monitores> implements View.On
     Integer resourceId;
     ImageButton btnAcao;
 
-    public AdapterMonitores(Context context, int textViewResourceId, List<Monitores> monitoresList){//Mandar a classe mãe enviar o arraylist do mapaFragment para cá
+    public AdapterMonitores(Context context, int textViewResourceId, List<Monitores> monitoresList){
         super(context, textViewResourceId, monitoresList);
         resourceId = textViewResourceId;
         this.layoutInflater = LayoutInflater.from(context);
@@ -38,7 +38,7 @@ public class AdapterMonitores extends ArrayAdapter<Monitores> implements View.On
 
         TextView txtNome = (TextView) convertView.findViewById(R.id.textViewNomeMonitor);
 
-        //TextView txtRua = (TextView) convertView.findViewById(R.id.textViewRuaMonitor);
+        TextView txtRua = (TextView) convertView.findViewById(R.id.textViewRuaMonitor);
 
         TextView txtPreco = (TextView) convertView.findViewById(R.id.textViewPrecoMonitor);
 
@@ -46,6 +46,7 @@ public class AdapterMonitores extends ArrayAdapter<Monitores> implements View.On
 
         txtNome.setText(monitores.getNome());
         txtPreco.setText(String.valueOf(monitores.getPreco()));
+        txtRua.setText(monitores.getEndereco());
 
         btnAcao.setOnClickListener(this);
         if(monitores.getStatus() == "disponivel") {

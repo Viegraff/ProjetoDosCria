@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,9 +32,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.FileDescriptor;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static android.content.Context.LOCATION_SERVICE;
 import static android.content.Intent.getIntent;
@@ -82,21 +87,14 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap map) {
         try {
-            Location locationAtual = new Location("");//locationManager.getLastKnownLocation(provider);//new Location("");
-            /*for(String provider : locationManager.getAllProviders()){
-                Toast.makeText(getActivity(), provider, Toast.LENGTH_LONG).show();
-            }
-
-            /*locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-            provider = locationManager.getBestProvider(criteria,true);*/
-
-            //Location locationAtual = locationManager.getLastKnownLocation(provider);
+            Location locationAtual = new Location("");
 
             googleMap = map;
             googleMap.setOnMapClickListener(this);
             googleMap.getUiSettings().setZoomControlsEnabled(true);
             googleMap.setMyLocationEnabled(true);
+
+            monits = auxiliarMonitor.listarMonitores();
 
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(locationAtual.getLatitude(), locationAtual.getLongitude()));
@@ -111,11 +109,12 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     @Override
     public void onMapClick(LatLng latLng) {
         googleMap.clear();
+        try {
 
         Location location = new Location("");
         location.setLatitude(latLng.latitude);
         location.setLongitude(latLng.longitude);
-        Toast.makeText(getContext(), "Coordenadas: " + latLng.toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Coordenadas: " + latLng.toString(), Toast.LENGTH_SHORT).show();
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Você está observando aqui!");
@@ -132,20 +131,28 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
             locDestino.setLatitude(latitude);
             locDestino.setLongitude(longitude);
             if (location.distanceTo(locDestino) <= 5000) {
+                Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
 
+                List<Address> adresses = geocoder.getFromLocation(latitude,longitude,1);
+                //Toast.makeText(getContext(), "Endereço: " + adresses.get(0).getAddressLine(0).toString(), Toast.LENGTH_SHORT).show();
+                monits.get(i).setEndereco(adresses.get(0).getAddressLine(0).toString());
                 markerOptions.position(loc);
-                markerOptions.title(monits.get(i).getNome());
+                markerOptions.title(adresses.get(0).getAddressLine(0).toString());
 
                 googleMap.addMarker(markerOptions);
             } else {
                 //Toast.makeText(getActivity(), "Não está perto!", Toast.LENGTH_SHORT).show();
             }
         }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onLocationChanged(Location location) {
         googleMap.clear();
+        try{
 
         LatLng novaLocalizacao = new LatLng(location.getLatitude(), location.getLongitude());
 
@@ -155,23 +162,30 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
 
         googleMap.addMarker(markerOptions);
 
-        for (int i = 0; i < monits.size(); i++){
-            double latitude = monits.get(i).getLatitude();
-            double longitude = monits.get(i).getLongitude();
-            // if(addProximityAlert(latitude, longitude)){
-            LatLng loc = new LatLng(latitude, longitude);
-            Location locDestino = new Location("");
-            locDestino.setLatitude(latitude);
-            locDestino.setLongitude(longitude);
-            if(location.distanceTo(locDestino) <= 5000){
+            for (int i = 0; i < monits.size(); i++) {
+                double latitude = monits.get(i).getLatitude();
+                double longitude = monits.get(i).getLongitude();
+                // if(addProximityAlert(latitude, longitude)){
+                LatLng loc = new LatLng(latitude, longitude);
+                Location locDestino = new Location("");
+                locDestino.setLatitude(latitude);
+                locDestino.setLongitude(longitude);
+                if (location.distanceTo(locDestino) <= 5000) {
+                    Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
 
-                markerOptions.position(loc);
-                markerOptions.title(monits.get(i).getNome());
+                    List<Address> adresses = geocoder.getFromLocation(latitude,longitude,1);
+                    //Toast.makeText(getContext(), "Endereço: " + adresses.get(0).getAddressLine(0).toString(), Toast.LENGTH_SHORT).show();
+                    monits.get(i).setEndereco(adresses.get(0).getAddressLine(0).toString());
+                    markerOptions.position(loc);
+                    markerOptions.title(monits.get(i).getNome());//(adresses.get(0).getAddressLine(0).toString());
 
-                googleMap.addMarker(markerOptions);
-            } else {
-                //Toast.makeText(getActivity(), "Não está perto!", Toast.LENGTH_SHORT).show();
+                    googleMap.addMarker(markerOptions);
+                } else {
+                    //Toast.makeText(getActivity(), "Não está perto!", Toast.LENGTH_SHORT).show();
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
