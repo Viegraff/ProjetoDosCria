@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.projetodoscria.R;
 import com.example.projetodoscria.modelo.Monitores;
+import com.example.projetodoscria.util.AuxiliarMonitor;
 import com.example.projetodoscria.view.tabs.TabMonitores;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -40,18 +42,21 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     private GoogleMap googleMap;
     private GoogleApiClient mGoogleApiClient;
     private LocationManager locationManager;
-    ArrayList<Monitores> monits = new ArrayList<Monitores>();
+
     private String provider;
 
     Context context;
+
+    AuxiliarMonitor auxiliarMonitor = AuxiliarMonitor.getInstance();
+    ArrayList<Monitores> monits = new ArrayList<Monitores>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        monits.add(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974, 6.93, "disponivel"));
-        monits.add(new Monitores("Ponto 1", -22.9, -43.1, 7.35, "disponivel"));
-        monits.add(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834, 6.93, "indisponivel"));
+        auxiliarMonitor.adicionarMonitor(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974, 6.93, "disponivel"));
+        auxiliarMonitor.adicionarMonitor(new Monitores("Ponto 1", -22.9, -43.1, 7.35, "disponivel"));
+        auxiliarMonitor.adicionarMonitor(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834, 6.93, "indisponivel"));
 
         getMapAsync(this);
     }

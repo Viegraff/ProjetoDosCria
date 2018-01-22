@@ -4,7 +4,8 @@
     android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="12dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/linearLayoutMonitores">
 
 
     <LinearLayout
