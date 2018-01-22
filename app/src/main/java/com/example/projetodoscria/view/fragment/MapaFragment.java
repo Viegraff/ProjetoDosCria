@@ -53,10 +53,6 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
         monits.add(new Monitores("Ponto 1", -22.9, -43.1, 7.35, "disponivel"));
         monits.add(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834, 6.93, "indisponivel"));
 
-        Intent intent;
-        intent.putExtra("monits", monits);
-        startActivity(intent);
-
         getMapAsync(this);
     }
 

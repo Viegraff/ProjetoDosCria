@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<life.knowledge4.videotrimmer.K4LVideoTrimmer xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/videoTrimmer"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/preto">
 
-</life.knowledge4.videotrimmer.K4LVideoTrimmer>
+    <Button
+        android:id="@+id/buttonManterOriginalVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manter Original"
+        android:layout_gravity="right"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <life.knowledge4.videotrimmer.K4LVideoTrimmer
+        android:id="@+id/videoTrimmer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+    </life.knowledge4.videotrimmer.K4LVideoTrimmer>
+
+</LinearLayout>

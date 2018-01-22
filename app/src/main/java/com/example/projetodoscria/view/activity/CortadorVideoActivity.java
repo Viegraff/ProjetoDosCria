@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.projetodoscria.R;
@@ -13,7 +15,6 @@ import com.example.projetodoscria.R;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -21,46 +22,49 @@ import life.knowledge4.videotrimmer.K4LVideoTrimmer;
 import life.knowledge4.videotrimmer.interfaces.OnK4LVideoListener;
 import life.knowledge4.videotrimmer.interfaces.OnTrimVideoListener;
 
-public class CortadorVideoActivity extends Activity implements OnTrimVideoListener, OnK4LVideoListener {
+import static com.example.projetodoscria.view.activity.MenuActivity.CAMINHO_ARQUIVO;
 
-    InputStream inputStream = null;
-    OutputStream outputStream = null;
+public class CortadorVideoActivity extends Activity implements OnTrimVideoListener, OnK4LVideoListener, View.OnClickListener {
 
+    Button buttonManterOriginal;
     K4LVideoTrimmer videoTrimmer;
+
+    InputStream inputStream;
+    OutputStream outputStream;
+
+    String caminhoVideoOriginal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cortador);
 
+        buttonManterOriginal = (Button) findViewById(R.id.buttonManterOriginalVideo);
+        buttonManterOriginal.setOnClickListener(this);
+
         videoTrimmer = (K4LVideoTrimmer) findViewById(R.id.videoTrimmer);
 
         Intent intent = getIntent();
-        String caminhoVideo = null;
 
         if (intent != null) {
-            caminhoVideo = intent.getStringExtra(MenuActivity.CAMINHO_ARQUIVO);
+            caminhoVideoOriginal = intent.getStringExtra(CAMINHO_ARQUIVO);
         }
 
         if (videoTrimmer != null) {
             videoTrimmer.setMaxDuration(10);
             videoTrimmer.setOnTrimVideoListener(this);
             videoTrimmer.setOnK4LVideoListener(this);
-            videoTrimmer.setVideoURI(Uri.parse(caminhoVideo));
+            videoTrimmer.setVideoURI(Uri.parse(caminhoVideoOriginal));
             videoTrimmer.setVideoInformationVisibility(true);
         }
 
     }
 
     @Override
-    public void onVideoPrepared() {
-        Toast.makeText(this, "onVideoPrepared", Toast.LENGTH_LONG).show();
-    }
+    public void onVideoPrepared() {}
 
     @Override
-    public void onTrimStarted() {
-        Toast.makeText(this, "onTrimStarted", Toast.LENGTH_LONG).show();
-    }
+    public void onTrimStarted() {}
 
     @Override
     public void getResult(Uri uri) {
@@ -72,7 +76,7 @@ public class CortadorVideoActivity extends Activity implements OnTrimVideoListen
                 diretorioVideo.mkdir();
                 inputStream = new FileInputStream(arquivo);
                 //Log.e("Arquivo: ", arquivo.getAbsolutePath());
-                System.out.println("Caminho: "+arquivo.getAbsolutePath());
+                System.out.println("Caminho: " + arquivo.getAbsolutePath());
                 outputStream = new FileOutputStream(novoArquivo);
 
                 byte[] data = new byte[inputStream.available()];
@@ -92,9 +96,13 @@ public class CortadorVideoActivity extends Activity implements OnTrimVideoListen
                 outputStream.close();
             }
             arquivo.delete();
+
+
+            startActivity(new Intent(this, SelecionaMidiaActivity.class).putExtra(CAMINHO_ARQUIVO, novoArquivo.getPath()));
+
             finish();
         } catch (Exception exception) {
-            Log.e("ERRO:", exception.getMessage());
+            Log.e("XAMPSON:", exception.getMessage());
         }
     }
 
@@ -110,16 +118,10 @@ public class CortadorVideoActivity extends Activity implements OnTrimVideoListen
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-   /* public static boolean createDirIfNotExists(String path) {
-        boolean ret = true;
-
-        File file = new File(Environment.getExternalStorageDirectory(), path);
-        if (!file.exists()) {
-            if (!file.mkdirs()) {
-                Log.e("XAMPSON", "Problem creating Image folder");
-                ret = false;
-            }
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == buttonManterOriginal.getId()) {
+            startActivity(new Intent(this, SelecionaMidiaActivity.class).putExtra(CAMINHO_ARQUIVO, caminhoVideoOriginal));
         }
-        return ret;
-    }*/
+    }
 }
