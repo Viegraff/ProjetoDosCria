@@ -32,11 +32,6 @@ public class TabMonitores extends ListFragment {
 
         monits = auxiliarMonitor.listarMonitores();
 
-           /* monits.add(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974, 6.93, "disponivel"));
-            monits.add(new Monitores("Ponto 1", -22.9, -43.1, 7.35, "disponivel"));
-            monits.add(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834, 6.93, "indisponivel"));*/
-
-
         AdapterMonitores adapter = new AdapterMonitores(getActivity(), R.layout.adapter_monitores, monits);
         setListAdapter(adapter);
 

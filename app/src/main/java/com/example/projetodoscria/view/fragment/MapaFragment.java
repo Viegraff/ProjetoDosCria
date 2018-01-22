@@ -59,9 +59,9 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        auxiliarMonitor.adicionarMonitor(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974, 6.93, "disponivel"));
-        auxiliarMonitor.adicionarMonitor(new Monitores("Ponto 1", -22.9, -43.1, 7.35, "disponivel"));
-        auxiliarMonitor.adicionarMonitor(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834, 6.93, "indisponivel"));
+        monits.add(new Monitores("Ponto 0", -22.824371412016053, -43.30047223716974, 6.93, "disponivel"));
+        monits.add(new Monitores("Ponto 1", -22.9, -43.1, 7.35, "disponivel"));
+        monits.add(new Monitores("Ponto 2", -22.822915903955465, -43.29979196190834, 6.93, "indisponivel"));
 
         getMapAsync(this);
     }
@@ -94,7 +94,7 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
             googleMap.getUiSettings().setZoomControlsEnabled(true);
             googleMap.setMyLocationEnabled(true);
 
-            monits = auxiliarMonitor.listarMonitores();
+            //monits = auxiliarMonitor.listarMonitores();
 
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(new LatLng(locationAtual.getLatitude(), locationAtual.getLongitude()));
@@ -136,6 +136,8 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                 List<Address> adresses = geocoder.getFromLocation(latitude,longitude,1);
                 //Toast.makeText(getContext(), "Endereço: " + adresses.get(0).getAddressLine(0).toString(), Toast.LENGTH_SHORT).show();
                 monits.get(i).setEndereco(adresses.get(0).getAddressLine(0).toString());
+                auxiliarMonitor.adicionarMonitor(monits.get(i));
+
                 markerOptions.position(loc);
                 markerOptions.title(adresses.get(0).getAddressLine(0).toString());
 
@@ -176,6 +178,8 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                     List<Address> adresses = geocoder.getFromLocation(latitude,longitude,1);
                     //Toast.makeText(getContext(), "Endereço: " + adresses.get(0).getAddressLine(0).toString(), Toast.LENGTH_SHORT).show();
                     monits.get(i).setEndereco(adresses.get(0).getAddressLine(0).toString());
+
+                    auxiliarMonitor.adicionarMonitor(monits.get(i));
                     markerOptions.position(loc);
                     markerOptions.title(monits.get(i).getNome());//(adresses.get(0).getAddressLine(0).toString());
 
